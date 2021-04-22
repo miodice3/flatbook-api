@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
     def create 
         user = user.find_by(email: params[:user][:email])
         if user&& user.authenticate(params[:user][:password])
+            session[:id]= user.id
             render json: user
         else
             render json: {error: 'something went wrong : ('}
@@ -21,5 +22,9 @@ class SessionsController < ApplicationController
     def logout
         reset_session
         render json:{status: 200}
+    end
+
+
+    
 
 end
