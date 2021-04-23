@@ -2,10 +2,10 @@ class UsersController < ApplicationController
 
     def create
         user = User.new(user_params)
-    
+        # byebug
         if user.save
           session[:id] = user.id
-          render json: { status: 201, user: user, logged_in: true}
+          render json: user
         else
           render json: { status: 500, message: 'There was an error in creating an account'}
         end
@@ -28,6 +28,6 @@ class UsersController < ApplicationController
 
     private
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(:email, :password, :password_confirmation, :name)
     end
 end
