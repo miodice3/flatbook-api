@@ -12,10 +12,12 @@ class SessionsController < ApplicationController
     end
 
     def logged_in
+        # byebug
         if logged_in?
-            render json: {status: 201, user: current_user, logged_in: true}
+            # render json: {status: 201, user: current_user, logged_in: true}
+            render json: current_user
         else
-            render json: {status: 400, user:{}, logged_in: false}
+            render json: {user:{}}
         end
     end
 
